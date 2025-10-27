@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Chess — GitHub Pages</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css" />
+  </head>
+  <body class="light">
+    <div class="app-root">
+      <aside class="left-panel">
+        <div class="panel header">
+          <h2>Move History</h2>
+          <div class="controls-row">
+            <button id="analysisToggle">Show Move Analysis</button>
+            <button id="clearAnalysis">Clear</button>
+          </div>
+        </div>
+        <div class="panel moves" id="movesList" aria-live="polite"></div>
+      </aside>
+
+      <main class="main-area">
+        <div id="boardWrap">
+          <div id="board"></div>
+          <div class="last-move-overlay" id="lastMoveOverlay"></div>
+        </div>
+        <div class="status" id="status">Loading...</div>
+      </main>
+
+      <aside class="right-panel">
+        <div class="panel">
+          <label>Side: 
+            <select id="side">
+              <option value="white">Play White</option>
+              <option value="black">Play Black</option>
+            </select>
+          </label>
+          <label>AI Elo: 
+            <input id="elo" type="range" min="500" max="2000" value="1200" /> 
+            <span id="eloVal">1200</span>
+          </label>
+          <label>Theme: 
+            <select id="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
+          <label>Piece set: 
+            <select id="pieces">
+              <option value="wikipedia">WIKIPEDIA</option>
+              <option value="alpha">ALPHA</option>
+            </select>
+          </label>
+
+          <div class="button-row">
+            <button id="newBtn">New Game</button>
+            <button id="undoBtn">Undo</button>
+            <button id="flipBtn">Flip Board</button>
+          </div>
+
+          <div style="margin-top:12px">FEN: <input id="fen" type="text"/></div>
+          <div style="margin-top:8px"><button id="setFen">Set Position</button></div>
+        </div>
+      </aside>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

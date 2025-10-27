@@ -1,0 +1,76 @@
+:root {
+  --bg-light:#f9fafb; --fg-light:#0f172a; --panel-light:#ffffff;
+  --accent:#10b981; --muted:#6b7280;
+  --bg-dark:#071020; --fg-dark:#e6eef8; --panel-dark:#0f1724; --accent-dark:#34d399;
+}
+
+body.light { --bg:var(--bg-light); --fg:var(--fg-light); --panel:var(--panel-light); --accent:var(--accent); }
+body.dark { --bg:var(--bg-dark); --fg:var(--fg-dark); --panel:var(--panel-dark); --accent:var(--accent-dark); }
+
+* { box-sizing:border-box; }
+body {
+  font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+  margin:0; background:var(--bg); color:var(--fg); min-height:100vh;
+}
+.app-root {
+  display:grid; grid-template-columns:260px 540px 320px;
+  gap:20px; padding:24px; align-items:start;
+}
+
+.left-panel .panel, .right-panel .panel, .main-area .panel {
+  background:var(--panel); border-radius:12px; padding:12px;
+  box-shadow:0 6px 20px rgba(2,6,23,0.08);
+}
+
+.left-panel .panel.header { display:flex; flex-direction:column; gap:8px; }
+.controls-row { display:flex; gap:8px; }
+
+#boardWrap { position:relative; }
+#board {
+  width:540px; border-radius:14px; overflow:hidden;
+  box-shadow:0 12px 40px rgba(2,6,23,0.12);
+  transition:transform .3s;
+}
+#board:hover { transform:scale(1.01); }
+
+.status { text-align:center; margin-top:8px; font-weight:600; }
+.button-row { display:flex; gap:8px; margin-top:12px; }
+
+button {
+  appearance:none; border:none; padding:9px 12px; border-radius:8px;
+  background:linear-gradient(180deg,var(--accent),#059669);
+  color:white; font-weight:600; cursor:pointer;
+  transition:transform .12s,box-shadow .12s;
+}
+button:active { transform:translateY(1px); }
+
+/* Move history */
+.moves { height:72vh; overflow:auto; padding:8px; }
+.move-row { display:flex; justify-content:space-between; padding:8px; border-radius:8px; align-items:center; }
+.move-row:nth-child(odd) { background:rgba(0,0,0,0.02); }
+.move-notation { font-weight:600; }
+.move-eval { font-size:12px; color:var(--muted); }
+
+/* Highlights */
+.square-dot {
+  position:absolute; width:14px; height:14px; border-radius:50%;
+  transform:translate(-50%,-50%) scale(0.8); opacity:0;
+  transition:opacity .2s, transform .25s; pointer-events:none;
+}
+.illegal-overlay {
+  position:absolute; background:rgba(255,0,0,0.14);
+  border-radius:6px; opacity:0; transition:opacity .22s;
+}
+.last-move {
+  position:absolute; background:rgba(250,204,21,0.22);
+  border-radius:6px; transition:opacity .3s;
+}
+
+@media (max-width:1100px) {
+  .app-root { grid-template-columns:220px 1fr 260px; }
+  #board { width:420px; }
+}
+
+/* subtle fade animation */
+.fade-in { animation:fadeIn .34s ease-out; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
